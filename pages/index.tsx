@@ -1,5 +1,6 @@
 import { useAddress, useDisconnect, useUser, useLogin, useLogout, useMetamask } from '@thirdweb-dev/react';
 import type { NextPage } from 'next';
+import { useState } from 'react';
 
 const Home: NextPage = () => {
   const address = useAddress();
@@ -10,10 +11,12 @@ const Home: NextPage = () => {
   const logout = useLogout();
   const { user } = useUser();
 
-  const testWithAuth = async () => {
-    const res = await fetch("/api/protected/test");
+  const [secret, setSecret] = useState();
+
+  const getSecret = async () => {
+    const res = await fetch("/api/secret");
     const data = await res.json();
-    console.log(data);
+    setSecret(data);
   }
 
   return (
@@ -24,9 +27,10 @@ const Home: NextPage = () => {
           <button onClick={() => login()}>Login with Wallet</button>
           <button onClick={logout}>Logout</button>
           <p>Your address: {address}</p>
-          <pre>{JSON.stringify(user)}</pre>
+          <pre>User: {JSON.stringify(user || null)}</pre>
           <br/><br />
-          <button onClick={testWithAuth}>Test With Auth</button>
+          <button onClick={getSecret}>Get Secret</button>
+          <pre>Secret: {JSON.stringify(secret || null)}</pre>
         </>
       ) : (
         <button onClick={connect}>Connect Wallet</button>
