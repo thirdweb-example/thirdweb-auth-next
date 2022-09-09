@@ -1,5 +1,5 @@
-import type { AppProps } from 'next/app';
-import { ChainId, ThirdwebProvider } from '@thirdweb-dev/react';
+import type { AppProps } from "next/app";
+import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 
 // This is the chainId your dApp will work on.
 const activeChainId = ChainId.Mainnet;
@@ -7,9 +7,9 @@ const activeChainId = ChainId.Mainnet;
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThirdwebProvider
-      desiredChainId={activeChainId} 
+      desiredChainId={activeChainId}
       authConfig={{
-        domain: "localhost:3000",
+        domain: "example.com",
         authUrl: "/api/auth",
         loginRedirect: "/",
       }}
