@@ -1,7 +1,8 @@
 import { ThirdwebAuth } from "@thirdweb-dev/auth/next";
+import { PrivateKeyWallet } from "@thirdweb-dev/wallets";
 
 export const { ThirdwebAuthHandler, getUser } = ThirdwebAuth({
-  privateKey: process.env.ADMIN_PRIVATE_KEY || "",
+  wallet: new PrivateKeyWallet(process.env.THIRDWEB_PRIVATE_KEY || ""),
   domain: "example.com",
 });
 
