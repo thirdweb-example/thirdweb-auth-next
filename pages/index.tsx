@@ -31,12 +31,12 @@ const Home: NextPage = () => {
       {address ? (
         <>
           <button onClick={disconnect}>Disconnect Wallet</button>
-          <button onClick={() => login({})}>Login with Wallet</button>
+          <button onClick={() => login()}>Login with Wallet</button>
           <button onClick={() => logout()}>Logout</button>
           <p>Your address: {address}</p>
-          <pre>User: {JSON.stringify(user || null)}</pre>
+          <pre>User: {JSON.stringify(user || null, undefined, 2)}</pre>
           <br />
-          <br />
+
           <button onClick={getSecret}>Get Secret</button>
           <pre>Secret: {JSON.stringify(secret || null)}</pre>
         </>
