@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@thirdweb-dev/auth": "3.0.0-dev-a15a6b6",
-    "@thirdweb-dev/react": "3.7.0-dev-544cd16",
+    "@thirdweb-dev/react": "file:.yalc/@thirdweb-dev/react",
     "@thirdweb-dev/sdk": "3.7.0-dev-fcebc8f",
     "@thirdweb-dev/wallets": "0.2.0-dev-fcebc8f",
     "ethers": "^5.6.8",
