@@ -1,6 +1,5 @@
 import {
   useAddress,
-  useDisconnect,
   useUser,
   useLogin,
   useLogout,
@@ -34,6 +33,7 @@ const Home: NextPage = () => {
       )}
       <button onClick={getSecret}>Get Secret</button>
 
+      <pre>Connected Wallet: {address}</pre>
       <pre>User: {user?.address || "N/A"}</pre>
       <pre>Secret: {secret || "N/A"}</pre>
     </div>
