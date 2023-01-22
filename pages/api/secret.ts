@@ -11,7 +11,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   return res.status(200).json({
-    message: `This is a secret for ${user.address}. Don't tell anyone.`,
+    message: `This is a secret for ${user.address}.`,
   });
 };
 
