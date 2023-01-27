@@ -12,7 +12,6 @@
     "@thirdweb-dev/auth": "3.0.0-dev-60be790",
     "@thirdweb-dev/react": "3.7.0-dev-60be790",
     "@thirdweb-dev/sdk": "3.7.0-dev-60be790",
-    "@thirdweb-dev/wallets": "0.2.0-dev-60be790",
     "ethers": "^5.6.8",
     "next": "^12.1.6",
     "react": "^18.1.0",
