@@ -1,20 +1,20 @@
 import {
-  ConnectWallet,
   useAddress,
+  useUser,
   useLogin,
   useLogout,
-  useUser,
+  useMetamask,
 } from "@thirdweb-dev/react";
 import type { NextPage } from "next";
 import { useState } from "react";
-import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
   const address = useAddress();
-  const login = useLogin();
-  const logout = useLogout();
-  const { user } = useUser();
-  const [secret, setSecret] = useState("null");
+  const connect = useMetamask();
+  const { login } = useLogin();
+  const { logout } = useLogout();
+  const { user, isLoggedIn } = useUser();
+  const [secret, setSecret] = useState();
 
   const getSecret = async () => {
     const res = await fetch("/api/secret");
@@ -23,36 +23,19 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className={styles.container}>
-      {address ? (
-        <>
-          {user?.address ? (
-            <>
-              <p>Signed in as: {user?.address}</p>
-              <button onClick={logout} className={styles.button}>
-                Logout
-              </button>
-            </>
-          ) : (
-            <button onClick={() => login()} className={styles.button}>
-              Login with Wallet
-            </button>
-          )}
-
-          <pre
-            style={{
-              marginTop: "2rem",
-            }}
-          >
-            Secret: {secret}
-          </pre>
-          <button onClick={getSecret} className={styles.button}>
-            Get Secret
-          </button>
-        </>
+    <div>
+      {isLoggedIn ? (
+        <button onClick={() => logout()}>Logout</button>
+      ) : address ? (
+        <button onClick={() => login()}>Login</button>
       ) : (
-        <ConnectWallet />
+        <button onClick={() => connect()}>Connect</button>
       )}
+      <button onClick={getSecret}>Get Secret</button>
+
+      <pre>Connected Wallet: {address}</pre>
+      <pre>User: {JSON.stringify(user, undefined, 2) || "N/A"}</pre>
+      <pre>Secret: {secret || "N/A"}</pre>
     </div>
   );
 };
