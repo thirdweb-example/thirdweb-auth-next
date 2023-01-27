@@ -1,39 +1,57 @@
-import { useAddress, useDisconnect, useUser, useLogin, useLogout, useMetamask } from '@thirdweb-dev/react';
-import type { NextPage } from 'next';
-import { useState } from 'react';
+import {
+  ConnectWallet,
+  useAddress,
+  useLogin,
+  useLogout,
+  useUser,
+} from "@thirdweb-dev/react";
+import type { NextPage } from "next";
+import { useState } from "react";
+import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
   const address = useAddress();
-  const connect = useMetamask();
-  const disconnect = useDisconnect();
-
   const login = useLogin();
   const logout = useLogout();
   const { user } = useUser();
-
-  const [secret, setSecret] = useState();
+  const [secret, setSecret] = useState("null");
 
   const getSecret = async () => {
     const res = await fetch("/api/secret");
     const data = await res.json();
-    setSecret(data);
-  }
+    setSecret(data.message);
+  };
 
   return (
-    <div>
+    <div className={styles.container}>
       {address ? (
         <>
-          <button onClick={disconnect}>Disconnect Wallet</button>
-          <button onClick={() => login()}>Login with Wallet</button>
-          <button onClick={logout}>Logout</button>
-          <p>Your address: {address}</p>
-          <pre>User: {JSON.stringify(user || null)}</pre>
-          <br/><br />
-          <button onClick={getSecret}>Get Secret</button>
-          <pre>Secret: {JSON.stringify(secret || null)}</pre>
+          {user?.address ? (
+            <>
+              <p>Signed in as: {user?.address}</p>
+              <button onClick={logout} className={styles.button}>
+                Logout
+              </button>
+            </>
+          ) : (
+            <button onClick={() => login()} className={styles.button}>
+              Login with Wallet
+            </button>
+          )}
+
+          <pre
+            style={{
+              marginTop: "2rem",
+            }}
+          >
+            Secret: {secret}
+          </pre>
+          <button onClick={getSecret} className={styles.button}>
+            Get Secret
+          </button>
         </>
       ) : (
-        <button onClick={connect}>Connect Wallet</button>
+        <ConnectWallet />
       )}
     </div>
   );
