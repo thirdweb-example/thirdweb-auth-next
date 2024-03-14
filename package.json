@@ -9,19 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@thirdweb-dev/auth": "^3",
-    "@thirdweb-dev/react": "^3",
-    "@thirdweb-dev/sdk": "^3",
-    "ethers": "^5",
-    "next": "^13",
-    "react": "^18.2",
-    "react-dom": "^18.2"
+    "next": "^14",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "thirdweb": "1.0.0-beta-0f9bbad1a6d2f71af7725ec05960f5b06c00423e-20240314040834"
   },
   "devDependencies": {
-    "@types/node": "^18.11.18",
-    "@types/react": "^18.0.27",
+    "@types/react": "^18.2.65",
     "eslint": "^8.32.0",
-    "eslint-config-next": "^13",
-    "typescript": "^4.9.4"
+    "eslint-config-next": "^14.1.3",
+    "typescript": "^5.4.2"
   }
 }
