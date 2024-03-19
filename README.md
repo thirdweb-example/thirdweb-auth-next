@@ -7,17 +7,8 @@ To run the project, first clone this repository, and then run one of the followi
 ```bash
 npm install
 # or
-yarn install
+yarn
 ```
-
-Next, you need to create a `.env.local` file and set the `THIRDWEB_AUTH_PRIVATE_KEY` variable to the admin private key you want to use for Auth, as well as the `NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN` variable to the domain you want to use for Auth. Your `.env.local` file should look like the following:
-
-```.env.local
-THIRDWEB_AUTH_PRIVATE_KEY=...
-NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN=example.com
-```
-
-Finally, you can run the project with one of the following commands:
 
 ```bash
 npm run dev
