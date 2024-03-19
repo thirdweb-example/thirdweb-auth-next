@@ -9,14 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "^14",
+    "next": "^14.1.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "thirdweb": "1.0.0-beta-0f9bbad1a6d2f71af7725ec05960f5b06c00423e-20240314040834"
+    "thirdweb": "1.0.0-beta-e520e6edf222f6a61e290b9dbb8689c09225561d-20240319020318"
   },
   "devDependencies": {
-    "@types/react": "^18.2.65",
-    "eslint": "^8.32.0",
+    "@types/react": "^18.2.67",
+    "eslint": "^8.57.0",
     "eslint-config-next": "^14.1.3",
     "typescript": "^5.4.2"
   }

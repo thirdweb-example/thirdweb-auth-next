@@ -3,9 +3,14 @@ import Link from "next/link";
 
 const Home: NextPage = () => {
   return (
-    <div>
-      <Link href="/basic">Basic Example</Link>
-    </div>
+    <ul>
+      <li>
+        <Link href="/basic">Basic Example</Link>
+      </li>
+      <li>
+        <Link href="/jwt-cookie">JWT Cookie</Link>
+      </li>
+    </ul>
   );
 };
 
