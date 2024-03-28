@@ -9,10 +9,7 @@ const Basic: NextPage = () => {
     <ThirdwebProvider>
       <div>
         <h2>Step 1: Connect Wallet</h2>
-        <ConnectButton
-          client={client}
-          appMetadata={{ name: "auth test app", url: "https://thirdweb.com" }}
-        />
+        <ConnectButton client={client} />
         <h2>Step 2: Sign the login payload</h2>
         <LoginButton />
       </div>
