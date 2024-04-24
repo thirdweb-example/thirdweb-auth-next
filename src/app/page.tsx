@@ -10,6 +10,9 @@ const Home: NextPage = () => {
       <li>
         <Link href="/jwt-cookie">JWT Cookie</Link>
       </li>
+      <li>
+        <Link href="/connect-button">Connect Button Integration</Link>
+      </li>
     </ul>
   );
 };
