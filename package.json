@@ -3,22 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "^14.2.1",
+    "next": "^14.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "thirdweb": "0.0.0-dev-bd8d020d7dc1396ab661c0af4000972dd2d6037d-20240419063040"
+    "thirdweb": "5.11.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.79",
     "eslint": "^8.57.0",
-    "eslint-config-next": "^14.2.1",
-    "pino-pretty": "^11.0.0",
+    "eslint-config-next": "^14.2.2",
     "typescript": "^5.4.5"
   }
 }
