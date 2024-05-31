@@ -1,6 +1,6 @@
 "use server";
 import { VerifyLoginPayloadParams, createAuth } from "thirdweb/auth";
-import { privateKeyAccount } from "thirdweb/wallets";
+import { privateKeyToAccount } from "thirdweb/wallets";
 import { client } from "../../../lib/client";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -13,7 +13,7 @@ if (!privateKey) {
 
 const thirdwebAuth = createAuth({
   domain: process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN || "",
-  adminAccount: privateKeyAccount({ client, privateKey }),
+  adminAccount: privateKeyToAccount({ client, privateKey }),
 });
 
 export const generatePayload = thirdwebAuth.generatePayload;
