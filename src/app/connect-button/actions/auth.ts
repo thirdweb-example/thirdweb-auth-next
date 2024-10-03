@@ -3,6 +3,7 @@ import { VerifyLoginPayloadParams, createAuth } from "thirdweb/auth";
 import { privateKeyToAccount } from "thirdweb/wallets";
 import { client } from "../../../lib/client";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 const privateKey = process.env.THIRDWEB_ADMIN_PRIVATE_KEY || "";
 
@@ -24,6 +25,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
       payload: verifiedPayload.payload,
     });
     cookies().set("jwt", jwt);
+    redirect("/connect-button/secure");
   }
 }
 
