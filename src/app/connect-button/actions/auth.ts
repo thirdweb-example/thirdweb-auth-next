@@ -13,12 +13,14 @@ if (!privateKey) {
 const thirdwebAuth = createAuth({
   domain: process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN || "",
   adminAccount: privateKeyToAccount({ client, privateKey }),
+  client
 });
 
 export const generatePayload = thirdwebAuth.generatePayload;
 
 export async function login(payload: VerifyLoginPayloadParams) {
   const verifiedPayload = await thirdwebAuth.verifyPayload(payload);
+  console.log(verifiedPayload);
   if (verifiedPayload.valid) {
     const jwt = await thirdwebAuth.generateJWT({
       payload: verifiedPayload.payload,
@@ -29,6 +31,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
 
 export async function isLoggedIn() {
   const jwt = cookies().get("jwt");
+  console.log(jwt);
   if (!jwt?.value) {
     return false;
   }

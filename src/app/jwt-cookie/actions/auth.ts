@@ -14,6 +14,7 @@ if (!privateKey) {
 const thirdwebAuth = createAuth({
   domain: process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN || "",
   adminAccount: privateKeyToAccount({ client, privateKey }),
+  client
 });
 
 export const generatePayload = thirdwebAuth.generatePayload;

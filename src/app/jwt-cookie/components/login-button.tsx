@@ -12,7 +12,7 @@ export const LoginButton: React.FC = () => {
       return alert("Please connect your wallet");
     }
     // Step 1: Generate the payload
-    const payload = await generatePayload({ address: account.address });
+    const payload = await generatePayload({ address: account.address, chainId: 17000 });
     // Step 2: Sign the payload
     const signatureResult = await signLoginPayload({ account, payload });
     // Step 3: Call the login function we defined in the auth actions file
