@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { isLoggedIn } from "../actions/auth";
 
+export const dynamic = "force-dynamic";
 
 const AuthenticatedPage = async () => {
   // redirect back if user is not logged in

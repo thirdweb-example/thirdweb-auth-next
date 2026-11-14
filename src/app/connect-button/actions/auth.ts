@@ -5,30 +5,62 @@ import {
 	type VerifyLoginPayloadParams,
 	createAuth,
 } from "thirdweb/auth";
+import { createThirdwebClient } from "thirdweb";
 import { privateKeyToAccount } from "thirdweb/wallets";
-import { client } from "../../../lib/client";
 
-const privateKey = process.env.THIRDWEB_ADMIN_PRIVATE_KEY || "";
+function getThirdwebAuth() {
+	const privateKey = process.env.THIRDWEB_ADMIN_PRIVATE_KEY
+		?.trim()
+		.replace(/^['"]|['"]$/g, "")
+		.replace(/^0x/i, "")
+		.replace(/[\s-]/g, "");
+	const domain = process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN
+		?.trim()
+		.replace(/^['"]|['"]$/g, "");
 
-if (!privateKey) {
-	throw new Error("Missing THIRDWEB_ADMIN_PRIVATE_KEY in .env file.");
+	if (!privateKey) {
+		throw new Error("Missing THIRDWEB_ADMIN_PRIVATE_KEY in project environment variables.");
+	}
+
+	if (!/^[0-9a-fA-F]{64}$/.test(privateKey)) {
+		throw new Error(
+			"THIRDWEB_ADMIN_PRIVATE_KEY must be a 32-byte hexadecimal private key (64 hex characters, with an optional 0x prefix).",
+		);
+	}
+
+	if (!domain) {
+		throw new Error("Missing NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN in project environment variables.");
+	}
+
+	const clientId = process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID?.trim();
+	const secretKey = process.env.THIRDWEB_SECRET_KEY?.trim();
+
+	if (!clientId && !secretKey) {
+		throw new Error(
+			"Missing NEXT_PUBLIC_THIRDWEB_CLIENT_ID or THIRDWEB_SECRET_KEY in project environment variables.",
+		);
+	}
+
+	const authClient = createThirdwebClient(
+		secretKey ? { secretKey } : { clientId: clientId as string },
+	);
+
+	return createAuth({
+		domain,
+		adminAccount: privateKeyToAccount({ client: authClient, privateKey }),
+		client: authClient,
+	});
 }
 
-const thirdwebAuth = createAuth({
-	domain: process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN || "",
-	adminAccount: privateKeyToAccount({ client, privateKey }),
-	client,
-});
-
 export async function generatePayload(payload: GenerateLoginPayloadParams) {
-	return thirdwebAuth.generatePayload(payload);
+	return getThirdwebAuth().generatePayload(payload);
 }
 
 export async function login(payload: VerifyLoginPayloadParams) {
-	const verifiedPayload = await thirdwebAuth.verifyPayload(payload);
+	const verifiedPayload = await getThirdwebAuth().verifyPayload(payload);
 	console.log(verifiedPayload);
 	if (verifiedPayload.valid) {
-		const jwt = await thirdwebAuth.generateJWT({
+		const jwt = await getThirdwebAuth().generateJWT({
 			payload: verifiedPayload.payload,
 		});
 		const c = await cookies();
@@ -44,7 +76,7 @@ export async function isLoggedIn() {
 		return false;
 	}
 
-	const authResult = await thirdwebAuth.verifyJWT({ jwt: jwt.value });
+	const authResult = await getThirdwebAuth().verifyJWT({ jwt: jwt.value });
 	if (!authResult.valid) {
 		return false;
 	}

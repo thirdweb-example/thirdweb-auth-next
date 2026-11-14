@@ -1,22 +1,22 @@
 {
-	"name": "thirdweb-auth-next",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"dev": "next dev --turbo",
-		"build": "next build",
-		"start": "next start",
-		"lint": "next lint"
-	},
-	"dependencies": {
-		"next": "^15",
-		"react": "^19",
-		"react-dom": "^19",
-		"thirdweb": "^5"
-	},
-	"devDependencies": {
-		"@types/node": "22.13.12",
-		"@types/react": "^19",
-		"typescript": "^5.8.2"
-	}
+  "name": "thirdweb-auth-next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbo",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "next": "^15.2.8",
+    "react": "^19",
+    "react-dom": "^19",
+    "thirdweb": "^5"
+  },
+  "devDependencies": {
+    "@types/node": "22.13.12",
+    "@types/react": "^19",
+    "typescript": "^5.8.2"
+  }
 }
